@@ -1,0 +1,14 @@
+[uwsgi]
+  master = true
+  die-on-term = true
+  cap = setgid,setuid
+  enable-threads = true
+  emperor = {{ uwsgi_emperor }}
+  emperor-tyrant = true
+  # Logs
+  log-date = true
+  daemonize = {{ uwsgi_emperor_daemonize }}
+  touch-reload = %p
+
+  # Vassals
+  vassals-include = %dvassals-default.ini

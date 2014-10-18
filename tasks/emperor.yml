@@ -1,0 +1,25 @@
+---
+# Create and configure Emperor mode of uWSGI
+# For details see: https://uwsgi-docs.readthedocs.org/en/latest/Emperor.html
+
+- name: Configure uWSGI emperor
+  template: src=emperor/{{ item.src }} dest=/etc/uwsgi/{{ item.dest }} backup=yes owner=root group=root
+  with_items:
+    - { src: 'emperor.ini.jinja2', dest: 'emperor.ini' }
+    - { src: 'vassals-default.ini.jinja2', dest: 'vassals-default.ini' }
+
+- name: Configure Emperor via init.d
+  copy: src=emperor/uwsgi-daemon.sh dest=/etc/init.d/uwsgi owner=root group=root mode=755
+  when: uwsgi_initd
+
+- name: Run Emperor daemon via init.d
+  command: /etc/init.d/uwsgi start
+  when: uwsgi_initd
+
+- name: Configure Emperor via Upstart
+  copy: src=emperor/uwsgi-upstart.conf dest=/etc/init/emperor-uwsgi.conf owner=root group=root mode=0644
+  when: uwsgi_upstart
+
+- name: Run Emperor daemon via Upstart
+  service: name=emperor-uwsgi state=started enabled=yes
+  when: uwsgi_upstart

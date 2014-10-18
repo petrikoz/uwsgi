@@ -1,0 +1,28 @@
+---
+uwsgi_enabled: true
+
+# Emperor
+uwsgi_initd: true
+uwsgi_upstart: false
+
+# emperor.ini
+uwsgi_emperor: '/var/www/*/etc/uwsgi.ini'
+uwsgi_emperor_daemonize: '/var/log/uwsgi/emperor.log'
+
+# vassals-default.ini
+uwsgi_vassal_procname_prefix: '%(vassal_name)-'
+uwsgi_vassal_pidfile: '%(vassal_path)run/uwsgi.pid'
+uwsgi_vassal_socket: '%(vassal_path)run/uwsgi.sock'
+uwsgi_vassal_logto: '%(vassal_path)log/uwsgi.log'
+uwsgi_vassal_venv: '/var/www/.venvs/%(vassal_name)'
+
+# Vassal
+uwsgi_vassal_user: '{{ deploy_user }}'
+uwsgi_vassal_name: '{{ deploy_app_name }}'
+uwsgi_vassal_etc_dir: '{{ deploy_etc_dir }}'
+uwsgi_vassal_path: '{{ deploy_dir }}'
+uwsgi_vassal_app: 'proj.wsgi'
+uwsgi_vassal_options: [
+  'env = LC_ALL=ru_RU.UTF-8',
+  'env = LANG=ru_RU.UTF-8'
+]

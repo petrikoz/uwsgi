@@ -1,0 +1,6 @@
+---
+# Create and configure uWSGI vassal item
+# For details see: https://uwsgi-docs.readthedocs.org/en/latest/Options.html
+
+- name: Configure uWSGI vassal
+  template: src=vassal/uwsgi.ini.jinja2 dest={{ uwsgi_vassal_etc_dir }}/uwsgi.ini owner={{ uwsgi_vassal_user }} group={{ uwsgi_vassal_user }}

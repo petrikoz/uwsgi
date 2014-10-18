@@ -1,0 +1,6 @@
+---
+# Install latest version uWSGI and configure it
+
+- include: uwsgi.yml
+  when: uwsgi_enabled
+  tags: [uwsgi]

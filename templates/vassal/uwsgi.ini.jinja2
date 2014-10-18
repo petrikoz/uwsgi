@@ -1,0 +1,13 @@
+[uwsgi]
+# For common settings see: /etc/uwsgi/vassals-default.ini
+
+# Define custom variables
+vassal_name = {{ uwsgi_vassal_name }}
+vassal_path = {{ uwsgi_vassal_path }}
+
+touch-reload = %p
+module = {{ uwsgi_vassal_app }}
+
+{% for option in wsgi_uwsgi_options %}
+{{option}}
+{% endfor %}

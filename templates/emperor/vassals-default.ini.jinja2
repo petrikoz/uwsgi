@@ -1,0 +1,30 @@
+[uwsgi]
+  master = true
+  auto-procname = true
+  procname-prefix = {{ uwsgi_vassal_procname_prefix }}
+  processes = 2
+  enable-threads = true
+  single-interpreter = true
+  harakiri = 60
+  post-buffering = 8192
+  vacuum = true
+  buffer-size=32768
+  need-app = true
+  no-default-app = true
+  reload-on-exception = true
+  touch-reload = %p
+
+  # Run files
+  pidfile = {{ uwsgi_vassal_pidfile }}
+  socket = {{ uwsgi_vassal_socket }}
+
+  # Logging
+  disable-logging = true
+  ignore-sigpipe = true
+  ignore-write-errors = true
+  log-date = true
+  logto = {{ uwsgi_vassal_logto }}
+
+  # Application
+  pythonpath = %(vassal_path)
+  venv = {{ uwsgi_vassal_venv }}
