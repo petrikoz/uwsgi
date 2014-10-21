@@ -14,12 +14,13 @@
 
 - name: Run Emperor daemon via init.d
   command: /etc/init.d/uwsgi start
+  ignore_errors: yes
   when: uwsgi_initd
 
 - name: Configure Emperor via Upstart
   copy: src=emperor/uwsgi-upstart.conf dest=/etc/init/emperor-uwsgi.conf owner=root group=root mode=0644
-  when: uwsgi_upstart
+  when: not uwsgi_initd
 
 - name: Run Emperor daemon via Upstart
   service: name=emperor-uwsgi state=started enabled=yes
-  when: uwsgi_upstart
+  when: not uwsgi_initd
