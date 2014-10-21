@@ -18,8 +18,7 @@ The role variables and default values.
 uwsgi_enabled: true                                    # Enable the role
 
 # Emperor
-uwsgi_initd: true                                      # Run daemon by init.d
-uwsgi_upstart: false                                   # Run daemon by Upstart
+uwsgi_initd: true                                      # Run daemon by init.d. If set false then run via Upstart
 
 # emperor.ini
 uwsgi_emperor: '/var/www/*/etc/uwsgi.ini'              # Pattern to vassals configs
@@ -27,9 +26,9 @@ uwsgi_emperor_daemonize: '/var/log/uwsgi/emperor.log'  # Emperor logs
 
 # vassals-default.ini
 uwsgi_vassal_procname_prefix: '%(vassal_name)-'        #
-uwsgi_vassal_pidfile: '%(vassal_path)run/uwsgi.pid'    # Default settings
-uwsgi_vassal_socket: '%(vassal_path)run/uwsgi.sock'    # which apllies to
-uwsgi_vassal_logto: '%(vassal_path)log/uwsgi.log'      # all vassals
+uwsgi_vassal_pidfile: '%(vassal_path)/run/uwsgi.pid'   # Default settings
+uwsgi_vassal_socket: '%(vassal_path)/run/uwsgi.sock'   # which apllies to
+uwsgi_vassal_logto: '%(vassal_path)/log/uwsgi.log'     # all vassals
 uwsgi_vassal_venv: '/var/www/.venvs/%(vassal_name)'    #
 
 # Vassal

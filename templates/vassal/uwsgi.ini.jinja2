@@ -8,6 +8,6 @@ vassal_path = {{ uwsgi_vassal_path }}
 touch-reload = %p
 module = {{ uwsgi_vassal_app }}
 
-{% for option in wsgi_uwsgi_options %}
+{% for option in uwsgi_vassal_options %}
 {{option}}
 {% endfor %}
