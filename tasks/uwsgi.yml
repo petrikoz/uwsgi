@@ -14,5 +14,5 @@
 
 - include: vassal.yml
   sudo: yes
-  sudo_user: {{ uwsgi_vassal_user }}
+  sudo_user: '{{ uwsgi_vassal_user }}'
   tags: [uwsgi, vassal]
