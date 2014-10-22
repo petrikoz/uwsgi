@@ -1,5 +1,5 @@
-ITCase.uwsgi
-============
+uwsgi
+=====
 
 [Ansible](http://ansible.com) role which deploys wsgi application by uWSGI.
 
@@ -9,6 +9,7 @@ ITCase.uwsgi
 #### Requirements & Dependencies
 
 - [Stouts.deploy](https://github.com/Stouts/Stouts.deploy)
+- [Stouts.python](https://github.com/Stouts/Stouts.python)
 
 #### Variables
 
@@ -46,7 +47,7 @@ uwsgi_vassal_options: [
 #### Usage
 
 * Clone dependencies.
-* Add `ITCase.uwsgi` to your roles and change variables in your playbook file.
+* Add `uwsgi` to your roles and change variables in your playbook file.
 
 Example:
 
@@ -55,7 +56,8 @@ Example:
   sudo: yes
   roles:
     - Stouts.deploy
-    - ITCase.uwsgi
+    - Stouts.python
+    - uwsgi
 ```
 
 #### License
