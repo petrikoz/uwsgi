@@ -8,19 +8,17 @@
     - { src: 'emperor.ini.jinja2', dest: 'emperor.ini' }
     - { src: 'vassals-default.ini.jinja2', dest: 'vassals-default.ini' }
 
-- name: Configure Emperor via init.d
-  copy: src=emperor/uwsgi-daemon.sh dest=/etc/init.d/uwsgi owner=root group=root mode=755
+- name: Configure Emperor via System V
+  copy: src=emperor/system-v dest=/etc/init.d/uwsgi owner=root group=root mode=755
   when: uwsgi_initd
 
-- name: Run Emperor daemon via init.d
-  command: /etc/init.d/uwsgi start
-  ignore_errors: yes
+- name: Setup Emperor via System V
+  shell: update-rc.d uwsgi defaults
   when: uwsgi_initd
 
 - name: Configure Emperor via Upstart
-  copy: src=emperor/uwsgi-upstart.conf dest=/etc/init/emperor-uwsgi.conf owner=root group=root mode=0644
+  copy: src=emperor/upstart.conf dest=/etc/init/uwsgi.conf owner=root group=root mode=0644
   when: not uwsgi_initd
 
-- name: Run Emperor daemon via Upstart
-  service: name=emperor-uwsgi state=started enabled=yes
-  when: not uwsgi_initd
+- name: Run Emperor daemon
+  service: name=uwsgi state=started enabled=yes
